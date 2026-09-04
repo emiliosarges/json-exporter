@@ -406,4 +406,3 @@ NOG123_0003.json.gz
 ```
 
 A compactação pode reduzir significativamente o tráfego de rede e o espaço de armazenamento durante o envio via SFTP, sem alterar a estratégia de processamento por streaming.
- 
