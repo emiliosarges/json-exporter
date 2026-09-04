@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: rico-json-exporter
+  config:
+    import: "optional:file:.env[.properties]"
+  datasource:
+    url: jdbc:mariadb://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:rico}
+    username: ${DB_USER:admin}
+    password: ${DB_PASSWORD:1234}
+    driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:5}
+      minimum-idle: 1
+      auto-commit: true
+      connection-timeout: 30000
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: ${SERVER_PORT:8080}
+
+app:
+  export:
+    output-dir: ${EXPORT_OUTPUT_DIR:./output}
+    page-size: ${EXPORT_PAGE_SIZE:2000}
+    max-records-per-file: ${EXPORT_MAX_RECORDS_PER_FILE:100000}
+    max-file-size-mb: ${EXPORT_MAX_FILE_SIZE_MB:250}
+    size-check-interval: ${EXPORT_SIZE_CHECK_INTERVAL:500}
+  delivery:
+    mode: ${DELIVERY_MODE:LOCAL}
+  sftp:
+    host: ${SFTP_HOST:localhost}
+    port: ${SFTP_PORT:22}
+    username: ${SFTP_USER:usuario}
+    password: ${SFTP_PASSWORD:senha}
+    remote-directory: ${SFTP_REMOTE_DIRECTORY:/upload}
+    allow-unknown-keys: ${SFTP_ALLOW_UNKNOWN_KEYS:false}
+
+logging:
+  level:
+    br.com.nog.exporter: INFO
